@@ -14,7 +14,7 @@ class NoteFields{
 
 }
 class Note{
-  final int id;
+  final int? id;
   final bool isImportant;
   final int num;
   final String tittle;
@@ -22,7 +22,7 @@ class Note{
   final DateTime createdTime;
 
   Note({
-    required this.id,
+     this.id,
     required this.isImportant,
     required this.num,
     required this.tittle,
@@ -30,6 +30,34 @@ class Note{
     required this.createdTime,
 
 });
+  Note copy({
+    int? id,
+    bool? isImportant,
+    int? num,
+    String? title,
+    String? description,
+    DateTime? createdTime,
+  }) =>
+      Note(
+        id: id ?? this.id,
+        isImportant: isImportant ?? this.isImportant,
+        num: num ?? this.num,
+        tittle: title ?? this.tittle,
+        description: description ?? this.description,
+        createdTime: createdTime ?? this.createdTime,
+      );
+  Note fromJson(Map<String,Object>json)=>Note(
+    id: json[NoteFields.id] as int,
+    isImportant: json[NoteFields.isImportant] ==1,
+    num: json[NoteFields.num] as int,
+    tittle: json[NoteFields.tittle] as String,
+    description: json[NoteFields.description] as String,
+    createdTime: DateTime.parse(json[NoteFields.time] as String),
+
+
+
+
+  )
   Map<String,dynamic> toJson()=>{
     NoteFields.id:id,
     NoteFields.tittle:tittle,

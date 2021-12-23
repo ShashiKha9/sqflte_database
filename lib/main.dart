@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflte_database/modals/notes.dart';
+import 'package:sqflte_database/pages/notepage.dart';
 
 
 void main() {
-  runApp( Notes());
+  runApp( NotePage());
 }
 
 class Notes{
@@ -43,14 +44,16 @@ class Notes{
 
 
   }
+  //create database
   Future<Note> insert(Note note ) async {
     final db = await instance.database;
     final id = db.insert(tableNotes, note.toJson());
-    return note;
+    return note.copy(id: note.id);
   }
+  //read from data
   Future<Note> read(int id) async{
     final db = await instance.database;
-    final maps= db.query(
+    final maps= await db.query(
       tableNotes,
       columns: NoteFields.values,
       where: '${NoteFields.id}=?',
@@ -58,13 +61,12 @@ class Notes{
     );
     if(maps.isNotEmpty){
       return Note.fromJson(maps.first);
-
-    }
-    else {
+    } else {
       throw Exception("ID $id IS NOT FOUND");
     }
 
   }
+  //update the  data
   Future<int> update(Note note) async {
     final db = await instance.database;
     return db.update(tableNotes, note.toJson(),
@@ -73,6 +75,7 @@ class Notes{
 
 
 }
+// delete the data
 Future<int>delete(int id) async {
     final db = await instance.database;
     return await db.delete(tableNotes,
