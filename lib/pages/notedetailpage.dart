@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflte_database/main.dart';
 import 'package:sqflte_database/modals/notes.dart';
+import 'package:sqflte_database/pages/noteeditpage.dart';
 
 class NoteDetailPage extends StatefulWidget{
    final int noteId;
@@ -25,7 +24,6 @@ class NoteDetailPageState extends State<NoteDetailPage>{
   deleteButton(){
     IconButton(onPressed: () async {
       await Notes.instance.delete(widget.noteId);
-      Navigator.pop(context);
     }, icon: Icon(Icons.delete));
     Navigator.pop(context);
   }
@@ -33,7 +31,7 @@ class NoteDetailPageState extends State<NoteDetailPage>{
   editButton(){
     IconButton(onPressed: () async {
       if(isLoading)return;
-      await Notes.instance.delete(widget.noteId);
+      await Navigator.push(context, MaterialPageRoute(builder: (context)=> NoteEditPage(noteId: note)));
       getNotes();
     }, icon: Icon(Icons.edit_outlined));
   }
@@ -50,7 +48,7 @@ class NoteDetailPageState extends State<NoteDetailPage>{
     return SafeArea(
     child: Scaffold(
       appBar: AppBar(
-        actions: [],
+        actions: [editButton(),deleteButton()],
       ),
       body: isLoading ?
       CircularProgressIndicator()

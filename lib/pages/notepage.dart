@@ -10,7 +10,7 @@ class NotePage extends StatefulWidget{
   NotePageState createState()=> NotePageState();
 }
 class NotePageState extends State<NotePage>{
-  late List<Note> notes;
+   List<Note> ?notes;
   bool isLoading = false;
   @override
   void initState() {
@@ -18,38 +18,41 @@ class NotePageState extends State<NotePage>{
 
     getNotes();
   }
+
+   @override
+   void dispose(){
+     Notes.instance.close();
+
+     super.dispose();
+   }
   Future getNotes() async {
     setState(() => isLoading = true);
 
-    this.notes = await Notes.instance.read();
+    this.notes = await Notes.instance.readAllNotes();
 
     setState(() => isLoading = false);
   }
 
-  @override
-  void dispose(){
-    Notes.instance.close();
-    
-    super.dispose();
-  }
   @override
   Widget build(BuildContext context) {
 return SafeArea(
     child: Scaffold(
       body: Container(
         child: StaggeredGridView.countBuilder(crossAxisCount: 4,
-            itemCount: notes.length,
+            itemCount:notes!.length,
            staggeredTileBuilder: (index)=> StaggeredTile.fit(2  ,
             ),
           mainAxisSpacing: 4,
             crossAxisSpacing: 4,
           itemBuilder: (context,index){
-            final note = notes[index];
+            final note = notes![index];
             return GestureDetector(
               onTap: () async {
-               await  Navigator.push(context, MaterialPageRoute(builder: (context)=>NoteDetailPage(noteId: note.id,)));
+               await  Navigator.push(context, MaterialPageRoute(builder: (context)=>NoteDetailPage(noteId: note.id!,)));
+               getNotes();
                },
-              child: NoteCardWidget(note:note,index:index),
+
+              child: Text("Note Card"),
             );
 
 

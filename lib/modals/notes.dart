@@ -21,13 +21,14 @@ class Note{
   final String description;
   final DateTime createdTime;
 
-  Note({
+ const Note({
      this.id,
     required this.isImportant,
     required this.num,
     required this.tittle,
     required this.description,
     required this.createdTime,
+
 
 });
   Note copy({
@@ -46,7 +47,7 @@ class Note{
         description: description ?? this.description,
         createdTime: createdTime ?? this.createdTime,
       );
-  Note fromJson(Map<String,Object>json)=>Note(
+  static Note fromJson(Map<String,Object?>json)=>Note(
     id: json[NoteFields.id] as int,
     isImportant: json[NoteFields.isImportant] ==1,
     num: json[NoteFields.num] as int,
@@ -57,17 +58,14 @@ class Note{
 
 
 
-  )
-  Map<String,dynamic> toJson()=>{
-    NoteFields.id:id,
-    NoteFields.tittle:tittle,
-    NoteFields.num:num,
-    NoteFields.isImportant:isImportant ?1:0,
-    NoteFields.description:description,
-    NoteFields.time:createdTime.toIso8601String(),
+  );
+  Map<String,dynamic> toJson()=> {
+        NoteFields.id: id,
+        NoteFields.tittle: tittle,
+        NoteFields.num: num,
+        NoteFields.isImportant: isImportant ? 1 : 0,
+        NoteFields.description: description,
+        NoteFields.time: createdTime.toIso8601String(),
 
-
-
-
-  }
+      };
 }
