@@ -26,9 +26,9 @@ class NoteFormWidget extends StatelessWidget{
     maxLines: 1,
     initialValue: title,
     style: TextStyle(
-      color: Colors.black,
+      color: Colors.white54,
       fontWeight: FontWeight.bold,
-      fontSize: 24,
+      fontSize: 20,
     ),
     decoration: InputDecoration(
       border: InputBorder.none,
@@ -42,7 +42,7 @@ class NoteFormWidget extends StatelessWidget{
   Widget buildDescription() => TextFormField(
     maxLines: 5,
     initialValue: description,
-    style: TextStyle(color: Colors.black, fontSize: 18),
+    style: TextStyle(color: Colors.white54, fontSize: 16),
     decoration: InputDecoration(
       border: InputBorder.none,
       hintText: 'Type something...',

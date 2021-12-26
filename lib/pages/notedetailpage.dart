@@ -25,33 +25,36 @@ class NoteDetailPageState extends State<NoteDetailPage>{
 
   }
   // delete button
-   deleteButton(){
+  Widget deleteButton()=>
     IconButton(onPressed: () async {
       await Notes.instance.delete(widget.noteId);
+      Navigator.pop(context);
     }, icon: Icon(Icons.delete));
-    Navigator.pop(context);
-  }
+
   // edit button
-  editButton(){
+  Widget editButton()=>
     IconButton(onPressed: () async {
       if(isLoading)return;
       await Navigator.push(context, MaterialPageRoute(builder: (context)=> NoteEditPage(noteId: note)));
       getNotes();
     }, icon: Icon(Icons.edit_outlined));
-  }
-  Future getNotes()async {
-    setState(()  async {
-      isLoading =true;
-      this.note = await Notes.instance.read(widget.noteId);
-      isLoading =false;
 
-    });
+  Future getNotes()async {
+    setState(()  =>
+      isLoading =true);
+      this.note = await Notes.instance.read(widget.noteId);
+      setState(()=>
+        isLoading =false);
+
+
   }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
     child: Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.black,
         actions: [editButton(),deleteButton()],
       ),
       body: isLoading ?
@@ -61,17 +64,20 @@ class NoteDetailPageState extends State<NoteDetailPage>{
         padding: EdgeInsets.symmetric(vertical: 8),
         children: [
           Text(
+            DateFormat.yMMMd().format(note.createdTime),style: TextStyle(color: Colors.white54),
+          ),
+          SizedBox(height: 12,),
+          Text(
             note.tittle,
             style: TextStyle(
-              color: Colors.white
+              color: Colors.white54,
+              fontSize: 20
             ),
           ),
           SizedBox(height: 8,),
-          Text(
-            DateFormat.yMMMd().format(note.createdTime),
-          ),
+
           SizedBox(height: 8,),
-          Text(note.description,style: TextStyle(color: Colors.white,fontSize: 18),)
+          Text(note.description,style: TextStyle(color: Colors.white54,fontSize: 16),)
         ],
       ),),
 

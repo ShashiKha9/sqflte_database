@@ -35,7 +35,7 @@ class Note{
     int? id,
     bool? isImportant,
     int? num,
-    String? title,
+    String? tittle,
     String? description,
     DateTime? createdTime,
   }) =>
@@ -43,10 +43,11 @@ class Note{
         id: id ?? this.id,
         isImportant: isImportant ?? this.isImportant,
         num: num ?? this.num,
-        tittle: title ?? this.tittle,
+        tittle: tittle ?? this.tittle,
         description: description ?? this.description,
         createdTime: createdTime ?? this.createdTime,
       );
+
   static Note fromJson(Map<String,Object?>json)=>Note(
     id: json[NoteFields.id] as int?,
     isImportant: json[NoteFields.isImportant] ==1,
