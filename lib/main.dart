@@ -11,14 +11,15 @@ void main() {
 
 class Notes{
   static final  Notes instance = Notes.init();
-  Notes.init();
+
   static Database? _database;
+  Notes.init();
   Future<Database?> get database async {
     if(_database != null) return _database;
     _database= await  _initDB('notes.db');
     return _database;
-
   }
+
 
   Future<Database>  _initDB(String filePath ) async {
   final dpPath = await  getDatabasesPath();
@@ -28,19 +29,19 @@ class Notes{
   return  await openDatabase(path,version: 1, onCreate: _createDB);
   }
   Future<void> _createDB(Database db , int version)async {
-    final idType = "INTEGER PRIMARY KEY";
-    final booltype = "BOOLEAN";
-    final integerType="INTEGER";
-    final textType= "TEXT";
+    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    final booltype = 'BOOLEAN';
+    final integerType='INTEGER';
+    final textType= 'TEXT';
     
-    db.execute('''CREATETABLE $tableNotes(
-        ${NoteFields.id} $idType,
-        ${NoteFields.isImportant} $booltype,
-        ${NoteFields.num} $integerType,
+    await db.execute('''
+    CREATE TABLE $tableNotes (
+       ${NoteFields.id } $idType,
+       ${NoteFields.isImportant} $booltype,
+     ${NoteFields.num} $integerType,
         ${NoteFields.tittle} $textType,
         ${NoteFields.description} $textType,
-         ${NoteFields.time} $textType,
-
+         ${NoteFields.time} $textType
     )'''
     );
 

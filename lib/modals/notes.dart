@@ -4,7 +4,7 @@ class NoteFields{
   static final List<String> values =[
     id,isImportant,num,tittle,description,time
   ];
-  static final String id ="_id";
+   static final String id ="_id";
   static final String isImportant ="isImportant";
   static final String num ="num";
   static final String tittle ="tittle";
@@ -48,7 +48,7 @@ class Note{
         createdTime: createdTime ?? this.createdTime,
       );
   static Note fromJson(Map<String,Object?>json)=>Note(
-    id: json[NoteFields.id] as int,
+    id: json[NoteFields.id] as int?,
     isImportant: json[NoteFields.isImportant] ==1,
     num: json[NoteFields.num] as int,
     tittle: json[NoteFields.tittle] as String,

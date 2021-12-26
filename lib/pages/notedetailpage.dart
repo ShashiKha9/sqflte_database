@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sqflte_database/main.dart';
 import 'package:sqflte_database/modals/notes.dart';
 import 'package:sqflte_database/pages/noteeditpage.dart';
+import 'package:intl/intl.dart';
+
+
+
 
 class NoteDetailPage extends StatefulWidget{
    final int noteId;
@@ -21,7 +25,7 @@ class NoteDetailPageState extends State<NoteDetailPage>{
 
   }
   // delete button
-  deleteButton(){
+   deleteButton(){
     IconButton(onPressed: () async {
       await Notes.instance.delete(widget.noteId);
     }, icon: Icon(Icons.delete));
@@ -64,10 +68,10 @@ class NoteDetailPageState extends State<NoteDetailPage>{
           ),
           SizedBox(height: 8,),
           Text(
-            "${DateTime.now().year}",
+            DateFormat.yMMMd().format(note.createdTime),
           ),
           SizedBox(height: 8,),
-          Text(note.description,style: TextStyle(color: Colors.white),)
+          Text(note.description,style: TextStyle(color: Colors.white,fontSize: 18),)
         ],
       ),),
 
@@ -75,4 +79,5 @@ class NoteDetailPageState extends State<NoteDetailPage>{
 
     ))  ;
   }
+
 }

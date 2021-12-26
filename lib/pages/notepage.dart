@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sqflte_database/pages/notedetailpage.dart';
+import 'package:sqflte_database/pages/noteeditpage.dart';
+import 'package:sqflte_database/widget/notecard_widget.dart';
 
 import '../main.dart';
 import '../modals/notes.dart';
@@ -37,7 +39,23 @@ class NotePageState extends State<NotePage>{
   Widget build(BuildContext context) {
 return SafeArea(
     child: Scaffold(
-      body: Container(
+      backgroundColor: Colors.black,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        child: Icon(Icons.add),
+        onPressed: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => NoteEditPage()),
+          );
+          getNotes();
+        },
+      ),
+      body: Center(
+        child: isLoading
+        ? CircularProgressIndicator()
+        :notes!.isEmpty
+        ? Text("No Notes",style: TextStyle(fontSize: 24,color: Colors.white),):
+      Container(
         child: StaggeredGridView.countBuilder(crossAxisCount: 4,
             itemCount:notes!.length,
            staggeredTileBuilder: (index)=> StaggeredTile.fit(2  ,
@@ -52,7 +70,7 @@ return SafeArea(
                getNotes();
                },
 
-              child: Text("Note Card"),
+              child: NoteCardWidget(note: note,index: index,),
             );
 
 
@@ -61,6 +79,7 @@ return SafeArea(
 
       ),
 
+      )
     ));
   }
 }
