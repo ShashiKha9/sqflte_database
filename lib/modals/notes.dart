@@ -17,7 +17,7 @@ class Note{
   final int? id;
   final bool isImportant;
   final int num;
-  final String tittle;
+  final String title;
   final String description;
   final DateTime createdTime;
 
@@ -25,7 +25,7 @@ class Note{
      this.id,
     required this.isImportant,
     required this.num,
-    required this.tittle,
+    required this.title,
     required this.description,
     required this.createdTime,
 
@@ -35,7 +35,7 @@ class Note{
     int? id,
     bool? isImportant,
     int? num,
-    String? tittle,
+    String? title,
     String? description,
     DateTime? createdTime,
   }) =>
@@ -43,7 +43,7 @@ class Note{
         id: id ?? this.id,
         isImportant: isImportant ?? this.isImportant,
         num: num ?? this.num,
-        tittle: tittle ?? this.tittle,
+        title: title ?? this.title,
         description: description ?? this.description,
         createdTime: createdTime ?? this.createdTime,
       );
@@ -52,7 +52,7 @@ class Note{
     id: json[NoteFields.id] as int?,
     isImportant: json[NoteFields.isImportant] ==1,
     num: json[NoteFields.num] as int,
-    tittle: json[NoteFields.tittle] as String,
+    title: json[NoteFields.tittle] as String,
     description: json[NoteFields.description] as String,
     createdTime: DateTime.parse(json[NoteFields.time] as String),
 
@@ -62,7 +62,7 @@ class Note{
   );
   Map<String,dynamic> toJson()=> {
         NoteFields.id: id,
-        NoteFields.tittle: tittle,
+        NoteFields.tittle: title,
         NoteFields.num: num,
         NoteFields.isImportant: isImportant ? 1 : 0,
         NoteFields.description: description,

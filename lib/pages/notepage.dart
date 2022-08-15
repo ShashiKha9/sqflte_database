@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sqflte_database/pages/notedetailpage.dart';
-import 'package:sqflte_database/pages/noteeditpage.dart';
-import 'package:sqflte_database/widget/notecard_widget.dart';
 
 import '../main.dart';
 import '../modals/notes.dart';
+import '../widget/notecard_widget.dart';
+import 'noteeditpage.dart';
 
 class NotePage extends StatefulWidget{
   NotePageState createState()=> NotePageState();
@@ -70,7 +70,8 @@ return SafeArea(
                getNotes();
                },
 
-              child: NoteCardWidget(note: note,index: index,),
+              child:
+              NoteCardWidget(note: note,index: index,),
             );
 
 

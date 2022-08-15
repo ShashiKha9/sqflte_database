@@ -35,7 +35,7 @@ class NoteDetailPageState extends State<NoteDetailPage>{
   Widget editButton()=>
     IconButton(onPressed: () async {
       if(isLoading)return;
-      await Navigator.push(context, MaterialPageRoute(builder: (context)=> NoteEditPage(noteId: note)));
+      await Navigator.push(context, MaterialPageRoute(builder: (context)=> NoteEditPage(note: note)));
       getNotes();
     }, icon: Icon(Icons.edit_outlined));
 
@@ -68,7 +68,7 @@ class NoteDetailPageState extends State<NoteDetailPage>{
           ),
           SizedBox(height: 12,),
           Text(
-            note.tittle,
+            note.title,
             style: TextStyle(
               color: Colors.white54,
               fontSize: 20
