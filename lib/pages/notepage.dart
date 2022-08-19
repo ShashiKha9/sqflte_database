@@ -13,6 +13,7 @@ class NotePage extends StatefulWidget{
 }
 class NotePageState extends State<NotePage>{
    List<Note> ?notes;
+
   bool isLoading = false;
   @override
   void initState() {
@@ -45,7 +46,7 @@ return SafeArea(
         child: Icon(Icons.add),
         onPressed: () async {
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => NoteEditPage()),
+            MaterialPageRoute(builder: (context) => NoteEditPage(noteId: null!,)),
           );
           getNotes();
         },
@@ -65,11 +66,10 @@ return SafeArea(
           itemBuilder: (context,index){
             final note = notes![index];
             return GestureDetector(
-              onTap: () async {
-               await  Navigator.push(context, MaterialPageRoute(builder: (context)=>NoteDetailPage(noteId: note.id!,)));
+              onTap: () async {//edit note
+               await  Navigator.push(context, MaterialPageRoute(builder: (context)=>NoteEditPage(noteId: note.id!,note: note,)));
                getNotes();
                },
-
               child:
               NoteCardWidget(note: note,index: index,),
             );

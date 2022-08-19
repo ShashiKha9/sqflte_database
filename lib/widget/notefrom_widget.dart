@@ -26,7 +26,7 @@ class NoteFormWidget extends StatelessWidget{
     maxLines: 1,
     initialValue: title,
     style: TextStyle(
-      color: Colors.white54,
+      color: Colors.grey,
       fontWeight: FontWeight.bold,
       fontSize: 20,
     ),
@@ -42,7 +42,7 @@ class NoteFormWidget extends StatelessWidget{
   Widget buildDescription() => TextFormField(
     maxLines: 5,
     initialValue: description,
-    style: TextStyle(color: Colors.white54, fontSize: 16),
+    style: TextStyle(color: Colors.grey, fontSize: 16),
     decoration: InputDecoration(
       border: InputBorder.none,
       hintText: 'Type something...',
@@ -60,19 +60,19 @@ class NoteFormWidget extends StatelessWidget{
       child: Padding(padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            Row(
-              children: [
-                Switch(
-                  value: isImportant?? false,
-                  onChanged: onChangedImportant,
-                ),
-                Expanded(child: Slider(
-                    value: (number ??0).toDouble(),
-                    min: 0,
-                    max: 5,
-                    onChanged: (number)=>onChangedNumber(number.toInt())))
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Switch(
+            //       value: isImportant?? false,
+            //       onChanged: onChangedImportant,
+            //     ),
+            //     Expanded(child: Slider(
+            //         value: (number ??0).toDouble(),
+            //         min: 0,
+            //         max: 5,
+            //         onChanged: (number)=>onChangedNumber(number.toInt())))
+            //   ],
+            // ),
             buildTitle(),
             SizedBox(height: 8,),
             buildDescription(),

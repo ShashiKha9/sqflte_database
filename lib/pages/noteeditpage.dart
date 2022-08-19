@@ -6,10 +6,13 @@ import '../widget/notefrom_widget.dart';
 
 class NoteEditPage extends StatefulWidget {
   final Note? note;
+   final int noteId;
+
 
   const NoteEditPage({
     Key? key,
     this.note,
+     required this.noteId
   }) : super(key: key);
   @override
   _NoteEditPage createState() => _NoteEditPage();
@@ -34,8 +37,10 @@ class _NoteEditPage extends State<NoteEditPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    backgroundColor: Colors.black,
     appBar: AppBar(
-      actions: [buildButton()],
+      backgroundColor: Colors.black,
+      actions: [buildButton(),deleteButton()],
     ),
     body: Form(
       key: _formKey,
@@ -59,16 +64,24 @@ class _NoteEditPage extends State<NoteEditPage> {
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
-          primary: isFormValid ? null : Colors.grey.shade700,
-        ),
+      child: IconButton(
+        color:isFormValid ? null : Colors.grey.shade700,
+        // style: ElevatedButton.styleFrom(
+        //   onPrimary: Colors.white,
+        //   primary: isFormValid ? null : Colors.grey.shade700,
+        // ),
         onPressed: addOrUpdateNote,
-        child: Text('Save'),
+        icon: Icon(Icons.check),
       ),
     );
   }
+  // delete button
+  Widget deleteButton()=>
+      IconButton(onPressed: () async {
+        await Notes.instance.delete(widget.noteId);
+        Navigator.pop(context);
+      }, icon: Icon(Icons.delete));
+
 
   void addOrUpdateNote() async {
     final isValid = _formKey.currentState!.validate();

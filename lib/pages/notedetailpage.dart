@@ -35,7 +35,7 @@ class NoteDetailPageState extends State<NoteDetailPage>{
   Widget editButton()=>
     IconButton(onPressed: () async {
       if(isLoading)return;
-      await Navigator.push(context, MaterialPageRoute(builder: (context)=> NoteEditPage(note: note)));
+      await Navigator.push(context, MaterialPageRoute(builder: (context)=> NoteEditPage(note: note, noteId: widget.noteId, )));
       getNotes();
     }, icon: Icon(Icons.edit_outlined));
 

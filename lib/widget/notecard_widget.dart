@@ -30,6 +30,9 @@ class NoteCardWidget extends StatelessWidget {
     final minHeight = getMinHeight(index);
 
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)
+      ),
       color: color,
       child: Container(
         constraints: BoxConstraints(minHeight: minHeight),
@@ -38,18 +41,28 @@ class NoteCardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              time,
-              style: TextStyle(color: Colors.grey.shade700),
-            ),
             SizedBox(height: 4),
             Text(
               note.title,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            SizedBox(height: 4),
+            Text(
+              note.description,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+            ),
+
+            SizedBox(height: 20),
+            Text(
+              time,
+              style: TextStyle(color: Colors.grey.shade700),
             ),
           ],
         ),
