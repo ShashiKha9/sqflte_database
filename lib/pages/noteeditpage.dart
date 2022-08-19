@@ -6,13 +6,13 @@ import '../widget/notefrom_widget.dart';
 
 class NoteEditPage extends StatefulWidget {
   final Note? note;
-   final int noteId;
+   final int? noteId;
 
 
   const NoteEditPage({
     Key? key,
     this.note,
-     required this.noteId
+      this.noteId
   }) : super(key: key);
   @override
   _NoteEditPage createState() => _NoteEditPage();
@@ -78,7 +78,7 @@ class _NoteEditPage extends State<NoteEditPage> {
   // delete button
   Widget deleteButton()=>
       IconButton(onPressed: () async {
-        await Notes.instance.delete(widget.noteId);
+        await Notes.instance.delete(widget.noteId!);
         Navigator.pop(context);
       }, icon: Icon(Icons.delete));
 

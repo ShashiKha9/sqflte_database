@@ -46,7 +46,7 @@ return SafeArea(
         child: Icon(Icons.add),
         onPressed: () async {
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => NoteEditPage(noteId: null!,)),
+            MaterialPageRoute(builder: (context) => NoteEditPage()),
           );
           getNotes();
         },
